@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoja Atención</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="container mt-5" >
+  <h1> <center> Centro Medico <b> Alliansalud </b></center>  </h1>
+    <div class="alert alert-success display-3"> <center> Listado  de  Hojas de Atención </center>  </div>
+    <div>
+        <a href="agregarhoja">Agregar Nueva Hoja de Atención</a>
+    </div>
+    {% if hojaAtencion %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Profesional que atiende</th>
+                <th>Anamnesis Anterior</th>
+                <th>Medicamentos Recetados</th>
+                <th>Exámenes Solicitados</th>
+                <th>Alergias</th>
+                <th>Historial de Enfermedades</th>
+                <th>Medicamentos que toma</th>
+                <th>Diagnostico</th>
+                <th>Observaciones</th>
+                <th></th>
+                <th></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for e in hojaAtencion %}
+            <tr>
+                <td scope="row"> {{e.id}}</td>
+                <td>{{e.profesionalAtendio}}</td>
+                <td>{{e.anamnesisAnterior}}</td>
+                <td>{{e.medicamentosRecetados}}</td>
+                <td>{{e.examenesSolicitados}}</td>
+                <td>{{e.alergias}}</td>
+                <td>{{e.historialEnfermedades}}</td>
+                <td>{{e.medicamentosQueToma}}</td>
+                <td>{{e.diagnosticoObtenido}}</td>
+                <td>{{e.observaciones}}</td>
+                <td><a href="editarhoja/{{e.id}}">Editar</a></td>
+                <td><a href="eliminarhoja/{{e.id}}">Eliminar</a></td>
+
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info">No hay Hojas de Atención</div>
+
+        {% endif %}
+</body>
+</html>
