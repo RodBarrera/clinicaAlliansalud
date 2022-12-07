@@ -18,11 +18,11 @@ from django.urls import path
 
 from clinicApp.views import agregarSecretaria, startSecretaria, editarSecretaria, eliminarSecretaria, startMedico, \
     agregarMedico, editarMedico, startPaciente, agregarPaciente, editarPaciente, startHoja, agregarHoja, editarHoja, \
-    eliminarMedico, eliminarPaciente, eliminarHoja
+    eliminarMedico, eliminarPaciente, eliminarHoja, index, vistaMedico, vistaSecretaria, selVista
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', startSecretaria, name="secretaria"),
+    path('secretaria/', startSecretaria, name="secretaria"),
     path('agregar/', agregarSecretaria),
     path('editar/<int:id>', editarSecretaria),
     path('eliminar/<int:id>', eliminarSecretaria),
@@ -38,5 +38,9 @@ urlpatterns = [
     path('agregarhoja/', agregarHoja),
     path('editarhoja/<int:id>', editarHoja),
     path('eliminarhoja/<int:id>', eliminarHoja),
+    path('', index),
+    path('vistamedico/', vistaMedico),
+    path('vistasecretaria/', vistaSecretaria),
+    path('seleccion-vista/', selVista),
 
 ]

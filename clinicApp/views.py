@@ -83,7 +83,7 @@ def agregarMedico(request):
     return render(request, "agregar-medico.html",data)
 
 
-def editarMedico(request):
+def editarMedico(request,id):
     medico = get_object_or_404(Medico, pk=id)
     if request.method == 'POST':
         formularioMedico = MedicoForm(request.POST, instance=medico)
@@ -131,7 +131,7 @@ def agregarPaciente(request):
     data = {'formularioPaciente': formularioPaciente}
     return render(request, "agregar-paciente.html",data)
 
-def editarPaciente(request):
+def editarPaciente(request,id):
     paciente = get_object_or_404(Paciente, pk=id)
     if request.method == 'POST':
         formularioPaciente = PacienteForm(request.POST, instance=paciente)
@@ -180,7 +180,7 @@ def agregarHoja(request):
     return render(request, "agregar-hoja.html",data)
 
 
-def editarHoja(request):
+def editarHoja(request,id):
     hoja = get_object_or_404(HojaAtencion, pk=id)
     if request.method == 'POST':
         formularioHoja = HojaForm(request.POST, instance=hoja)
@@ -203,3 +203,16 @@ def eliminarHoja(request, id):
         hoja.delete()
 
     return redirect('hoja')
+
+
+def index(request):
+    return render(request, 'index.html')
+
+def vistaMedico(request):
+    return render(request, 'vista-medico.html')
+
+def vistaSecretaria(request):
+    return render(request, 'vista-secretaria.html')
+
+def selVista(request):
+    return render(request, 'seleccion-vista.html')
