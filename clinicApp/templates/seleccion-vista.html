@@ -9,10 +9,21 @@
 </head>
 <body class="text-center">
     {% if user.is_authenticated %}
-        <nav class="navbar navbar-expand p-3" >
-            <img class="avatar" src="{% static 'IMG/logo.png' %}">
-            <h2 class="ms-3 align-center">Centro Medico <b> Alliansalud </b></h2>
+        <!--INICIO NAVBAR-->
+        <nav class="navbar navbar-expand">
+          <div class="container-fluid">
+             <img class="avatar" src="{% static 'IMG/logo.png' %}">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               <h2 class="ms-3 align-center">Centro Médico <b> Alliansalud </b></h2>
+              </ul>
+              <form class="d-flex" role="search">
+                  <a class="btn btn-danger" style="width:180px" href="{% url 'logout' %}" role="button" >Cerrar Sesión</a>
+              </form>
+            </div>
+          </div>
         </nav>
+        <!--FIN NAVBAR-->
         <div class="container mt-5">
             <h1> <center> BIENVENIDO AL </center> </h1>
             <h1> <center> SISTEMA DE CONTROL EN CLÍNICA </center> </h1>
@@ -29,12 +40,12 @@
         <br>
         Estas conectado como: {{user.username}}
 
-    {% else %}
-        <p>
+ {% else %}
+        <h1 class="text-center pt-5">
             Ud. no ha iniciado Sesión
             <br>
-            <a href="{% url 'login' %}"> Iniciar Sesión</a>
-        </p>
+            <a class="btn btn-success" href="{% url 'login' %}"> Iniciar Sesión</a>
+        </h1>
     {% endif %}
 
 

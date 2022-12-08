@@ -39,9 +39,9 @@ urlpatterns = [
     path('agregarhoja/', agregarHoja),
     path('editarhoja/<int:id>', editarHoja),
     path('eliminarhoja/<int:id>', eliminarHoja),
-    #path('', index),
+    path('', index),
     path('vistamedico/', vistaMedico),
     path('vistasecretaria/', vistaSecretaria),
-    path('', selVista),
+    path('seleccionvista', selVista),
 
 ]
