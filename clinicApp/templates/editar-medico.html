@@ -18,7 +18,7 @@
            <h2 class="ms-3 align-center">Centro Médico <b> Alliansalud </b></h2>
           </ul>
           <form class="d-flex" role="search">
-            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistasecretaria" role="button">Menú</a>
+            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistasecretaria" role="button">Volver al Menú</a>
             <button class="btn btn-danger" style="width:180px" type="submit">Cerrar Sesión</button>
           </form>
         </div>
@@ -40,7 +40,7 @@
                                 {{formularioMedico}}
                             </table>
                             <hr>
-                            <button type="submit" class="btn btn-success btn-outline-light me-2" style="width:180px"> Enviar</button>
+                            <button type="submit" class="btn btn-success btn-outline-light me-2" style="width:180px"> Agregar</button>
                             {% csrf_token %}
                         </form>
                     </div>
@@ -50,8 +50,9 @@
     </div>
     <!--FIN CONTENIDO-->
 
+    <!--footer-->
+    <div id="foot" class="text-center p-4">
+        <h5>@AllianSalud 2022</h5>
+    </div>
 </body>
-<footer class="p-4">
-    <h5>@AllianSalud 2022</h5>
-</footer>
 </html>

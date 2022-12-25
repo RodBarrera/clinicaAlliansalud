@@ -18,7 +18,7 @@
            <h2 class="ms-3 align-center">Centro Médico <b> Alliansalud </b></h2>
           </ul>
           <form class="d-flex" role="search">
-            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistamedico" role="button">Menú</a>
+            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistamedico" role="button">Volver al Menú</a>
             <a class="btn btn-danger" style="width:180px" href="{% url 'logout' %}" role="button" >Cerrar Sesión</a>
           </form>
         </div>
@@ -41,14 +41,16 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Rut Paciente</th>
                                 <th>Profesional que atiende</th>
-                                <th>Anamnesis Anterior</th>
-                                <th>Medicamentos Recetados</th>
-                                <th>Exámenes Solicitados</th>
+                                <th>Fecha Atención</th>
                                 <th>Alergias</th>
                                 <th>Historial de Enfermedades</th>
                                 <th>Medicamentos que toma</th>
-                                <th>Diagnostico</th>
+                                <th>Anamnesis</th>
+                                <th>Diagnóstico</th>
+                                <th>Medicamentos Recetados</th>
+                                <th>Exámenes Solicitados</th>
                                 <th>Observaciones</th>
                                 <th></th>
                                 <th></th>
@@ -58,15 +60,17 @@
                             {% for e in hojaAtencion %}
                             <tr>
                                 <td scope="row"> {{e.id}}</td>
-                                <td><b>{{e.profesionalAtendio}}</b></td>
-                                <td><b>{{e.anamnesisAnterior}}</b></td>
-                                <td><b>{{e.medicamentosRecetados}}</b></td>
-                                <td><b>{{e.examenesSolicitados}}</b></td>
-                                <td><b>{{e.alergias}}</b></td>
-                                <td><b>{{e.historialEnfermedades}}</b></td>
-                                <td><b>{{e.medicamentosQueToma}}</b></td>
-                                <td><b>{{e.diagnosticoObtenido}}</b></td>
-                                <td><b>{{e.observaciones}}</b></td>
+                                <td><b>{{e.Rut_Paciente}}</b></td>
+                                <td><b>{{e.Profesional_que_Atendio}}</b></td>
+                                <td><b>{{e.Fecha_Atencion}}</b></td>
+                                <td><b>{{e.Alergias}}</b></td>
+                                <td><b>{{e.Historial_de_Enfermedades}}</b></td>
+                                <td><b>{{e.Medicamentos_que_toma}}</b></td>
+                                <td><b>{{e.Anamnesis}}</b></td>
+                                <td><b>{{e.Diagnostico}}</b></td>
+                                <td><b>{{e.Medicamentos_Recetados}}</b></td>
+                                <td><b>{{e.Examenes_Solicitados}}</b></td>
+                                <td><b>{{e.Observaciones}}</b></td>
                                 <!--<td><a href="editarhoja/{{e.id}}">Editar</a></td>-->
                                 <td><a href="/editarhoja/{{e.id}}" type="button" class="btn btn-outline-light" style="width:100px; background-color:rgb(83,144,145)">Editar</a></td>
                                 <!--<td><a href="eliminarhoja/{{e.id}}">Eliminar</a></td>-->
@@ -91,8 +95,10 @@
             <a class="btn btn-success" href="{% url 'login' %}"> Iniciar Sesión</a>
         </h1>
     {% endif %}
+
+    <!--footer-->
+    <div id="foot" class="text-center p-4">
+        <h5>@AllianSalud 2022</h5>
+    </div>
 </body>
-<footer class="p-4">
-    <h5>@AllianSalud 2022</h5>
-</footer>
 </html>

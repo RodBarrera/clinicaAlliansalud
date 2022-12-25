@@ -18,17 +18,43 @@
            <h2 class="ms-3 align-center">Centro Médico <b> Alliansalud </b></h2>
           </ul>
           <form class="d-flex" role="search">
-            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistasecretaria" role="button">Menú</a>
+            <a class="btn btn-success btn-outline-light me-2" style="width:180px" href="/vistasecretaria" role="button">Volver al Menú</a>
             <a class="btn btn-danger" style="width:180px" href="{% url 'logout' %}" role="button" >Cerrar Sesión</a>
           </form>
         </div>
       </div>
     </nav>
     <!--FIN NAVBAR-->
+
   <!--INICIO CONTENIDO-->
     <div class="container-fluid">
         <div>
             <h2 class="text-center mt-5">Listado  de  Pacientes</h2>
+
+            <!--Buscador-->
+            {% block buscador %}
+            <br>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-3 search">
+                        <form method="get">
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12">
+                                    <input type="text" class="form-control" placeholder="Buscar..." name="buscar">
+                                    <span class="input-group-list">
+                                        <i class="icon icon-search"></i>
+                                        <button type="submit" class="btn btn-success">Buscar</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endblock buscador %}
+            <!-- Fin Buscador-->
+
+            <!--Tabla-->
             <div class="container-fluid text-center mt-5">
                 <div class="row justify-content-center">
                     <div class="col col-lg-12 border border-dark rounded border-2 align-self-center">
@@ -45,14 +71,14 @@
                                         <th>Nombres</th>
                                         <th>Apellido Paterno</th>
                                         <th>Apellido Materno</th>
-                                        <th>Genero</th>
                                         <th>Fecha de Nacimiento</th>
-                                        <th>Direccion</th>
+                                        <th>Género</th>
+                                        <th>Dirección</th>
                                         <th>Comuna</th>
+                                        <th>Nacionalidad</th>
                                         <th>Teléfono</th>
                                         <th>Contacto Emergencia</th>
                                         <th>Teléfono Emergencia</th>
-                                        <th>País</th>
                                         <th>Previsión</th>
                                         <th></th>
                                         <th></th>
@@ -63,19 +89,19 @@
                                     {% for e in pacientes %}
                                     <tr>
                                         <td scope="row"><b> {{e.id}}</b></td>
-                                        <td><b>{{e.rut}}</b></td>
-                                        <td><b>{{e.nombres}}</b></td>
-                                        <td><b>{{e.apellido_p}}</b></td>
-                                        <td><b>{{e.apellido_m}}</b></td>
-                                        <td><b>{{e.gender}}</b></td>
-                                        <td><b>{{e.dateB}}</b></td>
-                                        <td><b>{{e.address}}</b></td>
+                                        <td><b>{{e.Rut}}</b></td>
+                                        <td><b>{{e.Nombres}}</b></td>
+                                        <td><b>{{e.Apellido_Paterno}}</b></td>
+                                        <td><b>{{e.Apellido_Materno}}</b></td>
+                                        <td><b>{{e.Fecha_Nacimiento}}</b></td>
+                                        <td><b>{{e.Genero}}</b></td>
+                                        <td><b>{{e.Direccion}}</b></td>
                                         <td><b>{{e.Comuna}}</b></td>
-                                        <td><b>{{e.phone}}</b></td>
-                                        <td><b>{{e.emergencyContact}}</b></td>
-                                        <td><b>{{e.emergencyPhone}}</b></td>
-                                        <td><b>{{e.country}}</b></td>
-                                        <td><b>{{e.health}}</b></td>
+                                        <td><b>{{e.Nacionalidad}}</b></td>
+                                        <td><b>{{e.Telefono}}</b></td>
+                                        <td><b>{{e.Contacto_de_Emergencia}}</b></td>
+                                        <td><b>{{e.Telefono_de_Emergencia}}</b></td>
+                                        <td><b>{{e.Sistema_de_Salud}}</b></td>
                                         <!--<td><a href="editar/{{e.id}}">Editar</a></td>-->
                                         <td><a href="/editarpaciente/{{e.id}}" type="button" class="btn btn-outline-light" style="width:100px; background-color:rgb(83,144,145)">Editar</a></td>
                                         <!--<td><a href="eliminar/{{e.id}}">Eliminar</a></td>-->
@@ -101,8 +127,10 @@
             <a class="btn btn-success" href="{% url 'login' %}"> Iniciar Sesión</a>
         </h1>
     {% endif %}
+
+<!--footer-->
+    <div id="foot" class="text-center p-4">
+        <h5>@AllianSalud 2022</h5>
+    </div>
 </body>
-<footer class="p-4">
-    <h5>@AllianSalud 2022</h5>
-</footer>
 </html>

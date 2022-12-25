@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+
 import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ifuph2poa0--*o(&lg6kc0pxypr*04_-vet)g&a7u_7f!g@(u)'
+SECRET_KEY = 'django-insecure-28nhk-()ug4o5sdqgpbide1o@eb&1qug+ahk+v1m*+v!r)c)8n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'clinicApp',
-
 ]
 
 MIDDLEWARE = [
@@ -75,7 +75,6 @@ WSGI_APPLICATION = 'centroMedico.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 
 pymysql.install_as_MySQLdb()
 DATABASES = {

@@ -1,15 +1,12 @@
 from django.db import models
-
+from django import forms
 # Create your models here.
 
 class Secretaria(models.Model):
-    rut = models.CharField(max_length=12)
-    nombres = models.CharField(max_length=50)
-    apellido_p = models.CharField(max_length=25)
-    apellido_m = models.CharField(max_length=25)
-
-
-
+    Rut = models.CharField(max_length=12)
+    Nombres = models.CharField(max_length=50)
+    Apellido_Paterno = models.CharField(max_length=25, verbose_name='Apellido Paterno')
+    Apellido_Materno = models.CharField(max_length=25)
 
 class Especialidades(models.Model):
     name = models.CharField(max_length=50)
@@ -20,41 +17,44 @@ class Especialidades(models.Model):
 
 class Medico(models.Model):
 
-    rut = models.CharField(max_length=12)
-    nombres = models.CharField(max_length=50)
-    apellido_p = models.CharField(max_length=25)
-    apellido_m = models.CharField(max_length=25)
-    category = models.ForeignKey(Especialidades, on_delete=models.SET_NULL, null=True)
+    Rut = models.CharField(max_length=12)
+    Nombres = models.CharField(max_length=50)
+    Apellido_Paterno = models.CharField(max_length=25)
+    Apellido_Materno = models.CharField(max_length=25)
+    Categoria = models.ForeignKey(Especialidades, on_delete=models.SET_NULL, null=True)
+
 
 
 class Paciente(models.Model):
 
-    rut = models.CharField(max_length=12)
-    nombres = models.CharField(max_length=50)
-    apellido_p = models.CharField(max_length=25)
-    apellido_m = models.CharField(max_length=25)
-    gender = models.CharField(max_length=25)
-    dateB = models.DateTimeField(blank=True, null=True)
-    address = models.CharField(max_length=25)
+    Rut = models.CharField(max_length=12)
+    Nombres = models.CharField(max_length=50)
+    Apellido_Paterno = models.CharField(max_length=25)
+    Apellido_Materno = models.CharField(max_length=25)
+    Fecha_Nacimiento = models.DateTimeField(blank=True, null=True)
+    Genero = models.CharField(max_length=25)
+    Direccion = models.CharField(max_length=25)
     Comuna = models.CharField(max_length=25)
-    phone = models.CharField(max_length=25)
-    emergencyContact = models.CharField(max_length=25)
-    emergencyPhone = models.CharField(max_length=25)
-    country = models.CharField(max_length=25)
-    health = models.CharField(max_length=25)
+    Nacionalidad = models.CharField(max_length=25)
+    Telefono = models.CharField(max_length=25)
+    Contacto_de_Emergencia = models.CharField(max_length=25)
+    Telefono_de_Emergencia = models.CharField(max_length=25)
+    Sistema_de_Salud = models.CharField(max_length=25)
 
 
 class HojaAtencion(models.Model):
 
-    profesionalAtendio = models.CharField(max_length=25)
-    anamnesisAnterior =  models.CharField(max_length=250)
-    medicamentosRecetados = models.CharField(max_length=250)
-    examenesSolicitados = models.CharField(max_length=250)
-    alergias = models.CharField(max_length=125)
-    historialEnfermedades = models.CharField(max_length=500)
-    medicamentosQueToma = models.CharField(max_length=250)
-    diagnosticoObtenido= models.CharField(max_length=500)
-    observaciones = models.CharField(max_length=250)
+    Rut_Paciente = models.CharField(max_length=25)
+    Profesional_que_Atendio = models.CharField(max_length=25)
+    Fecha_Atencion = models.DateTimeField(blank=True, null=True)
+    Alergias = models.CharField(max_length=125)
+    Historial_de_Enfermedades = models.CharField(max_length=500)
+    Medicamentos_que_toma = models.CharField(max_length=250)
+    Anamnesis = models.TextField(max_length=250)
+    Diagnostico = models.TextField(max_length=500)
+    Medicamentos_Recetados = models.CharField(max_length=250)
+    Examenes_Solicitados = models.CharField(max_length=250)
+    Observaciones = models.TextField(max_length=250)
 
 
 
