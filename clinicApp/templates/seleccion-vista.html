@@ -33,8 +33,12 @@
 
         <div class=" w-25 mt-4 d-inline-flex p-4 flex-column" style="background: #539091 ; border-radius: 20px">
             <div class="btn-group" role="group" aria-label="Basic example">
+                {% if perms.clinicApp.add_medico %}
               <a class="btn btn-success btn-outline-light mt-3 m-3" href="/vistasecretaria" role="button">Vista Secretaria</a>
+                {% endif %}
+                {% if perms.clinicApp.add_hojaatencion %}
               <a class="btn btn-success btn-outline-light mt-3 m-3" href="/vistamedico" role="button">Vista Médico</a>
+                {% endif %}
             </div>
         </div>
         <br>

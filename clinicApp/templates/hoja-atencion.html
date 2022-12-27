@@ -53,7 +53,10 @@
                                 <th>Exámenes Solicitados</th>
                                 <th>Observaciones</th>
                                 <th></th>
-                                <th></th>
+                                <!--si no tiene los permisos, no muestra el botón-->
+                                {% if perms.clinicApp.delete_hojaatencion %}
+                                    <th></th>
+                                {% endif %}
                             </tr>
                             </thead>
                             <tbody>
@@ -74,7 +77,10 @@
                                 <!--<td><a href="editarhoja/{{e.id}}">Editar</a></td>-->
                                 <td><a href="/editarhoja/{{e.id}}" type="button" class="btn btn-outline-light" style="width:100px; background-color:rgb(83,144,145)">Editar</a></td>
                                 <!--<td><a href="eliminarhoja/{{e.id}}">Eliminar</a></td>-->
-                                <td><a href="/eliminarhoja/{{e.id}}" type="button" class="btn btn-danger" style="width:100px">Eliminar</a></td>
+                                <!--si no tiene los permisos, no muestra el botón-->
+                                {% if perms.clinicApp.delete_hojaatencion %}
+                                    <td><a href="/eliminarhoja/{{e.id}}" type="button" class="btn btn-danger" style="width:100px">Eliminar</a></td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                             </tbody>

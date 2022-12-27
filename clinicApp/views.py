@@ -1,12 +1,15 @@
+from django.contrib.auth.decorators import permission_required
 from django.forms import modelform_factory
 from django.shortcuts import render, redirect, get_object_or_404
 
+import clinicApp.views
 from clinicApp.forms import SecretariaForm, MedicoForm, PacienteForm, HojaForm
 from clinicApp.models import Secretaria, Medico, Paciente, HojaAtencion
 
 from django.db.models import Q
 # Create your views here.
 
+@permission_required('clinicApp.add_secretaria')
 def startSecretaria(request):
 
     secretarias = Secretaria.objects.all()
@@ -21,6 +24,7 @@ def startSecretaria(request):
 #PacienteForm = modelform_factory(Paciente, exclude=[])
 #HojaForm = modelform_factory(HojaAtencion, exclude=[])
 
+@permission_required('clinicApp.add_secretaria')
 def agregarSecretaria(request):
     if request.method == 'POST':
         formularioSecretaria = SecretariaForm(request.POST)
@@ -44,7 +48,7 @@ def agregarSecretaria(request):
     data = {'formularioSecretaria': formularioSecretaria}
     return render(request, "agregar-secretaria.html", data)
 
-
+@permission_required('clinicApp.add_secretaria')
 def editarSecretaria(request,id):
     secretaria = get_object_or_404(Secretaria, pk= id)
     if request.method == 'POST':
@@ -60,7 +64,7 @@ def editarSecretaria(request,id):
     data = {'formularioSecretaria': formularioSecretaria}
     return render(request, "editar-secretaria.html",data)
 
-
+@permission_required('clinicApp.delete_secretaria')
 def eliminarSecretaria(request, id):
     secretaria = get_object_or_404(Secretaria, pk= id)
 
@@ -68,17 +72,19 @@ def eliminarSecretaria(request, id):
         secretaria.delete()
 
     return redirect('secretaria')
-
+@permission_required('clinicApp.add_medico')
 def startMedico(request):
-
+    queryset= request.GET.get("buscar")
+    print(queryset)
     medicos = Medico.objects.all()
-    data = {
-        'medicos': medicos
+    if queryset:
+        medicos = Medico.objects.filter(
+            Q(Rut=queryset) |
+            Q(Apellido_Paterno=queryset)
+        ).distinct()
+    return render(request, 'medico.html', {"medicos": medicos})
 
-        }
-    return render(request, 'medico.html', data)
-
-
+@permission_required('clinicApp.add_medico')
 def agregarMedico(request):
     if request.method == 'POST':
         formularioMedico = MedicoForm(request.POST)
@@ -107,7 +113,7 @@ def agregarMedico(request):
     data = {'formularioMedico': formularioMedico}
     return render(request, "agregar-medico.html",data)
 
-
+@permission_required('clinicApp.add_medico')
 def editarMedico(request, id):
     medico = get_object_or_404(Medico, pk=id)
     if request.method == 'POST':
@@ -123,7 +129,7 @@ def editarMedico(request, id):
     data = {'formularioMedico': formularioMedico}
     return render(request, "editar-medico.html",data)
 
-
+@permission_required('clinicApp.delete_medico')
 def eliminarMedico(request, id):
     medico = get_object_or_404(Medico, pk= id)
 
@@ -131,7 +137,6 @@ def eliminarMedico(request, id):
         medico.delete()
 
     return redirect('medico')
-
 
 def startPaciente(request):
     queryset= request.GET.get("buscar")
@@ -144,6 +149,18 @@ def startPaciente(request):
         ).distinct()
     return render(request, 'paciente.html', {"pacientes": pacientes})
 
+def startPacienteMed(request):
+    queryset= request.GET.get("buscar")
+    print(queryset)
+    pacientes = Paciente.objects.filter()
+    if queryset:
+        pacientes = Paciente.objects.filter(
+            Q(Nombres=queryset) |
+            Q(Rut=queryset)
+        ).distinct()
+    return render(request, 'pacientemed.html', {"pacientes": pacientes})
+
+@permission_required('clinicApp.add_paciente')
 def agregarPaciente(request):
     if request.method == 'POST':
         formularioPaciente = PacienteForm(request.POST)
@@ -174,6 +191,7 @@ def agregarPaciente(request):
     data = {'formularioPaciente': formularioPaciente}
     return render(request, "agregar-paciente.html",data)
 
+@permission_required('clinicApp.change_paciente')
 def editarPaciente(request, id):
     paciente = get_object_or_404(Paciente, pk=id)
     if request.method == 'POST':
@@ -181,15 +199,13 @@ def editarPaciente(request, id):
         if formularioPaciente.is_valid():
             formularioPaciente.save()
             return redirect('paciente')
-
-
     else:
         formularioPaciente = PacienteForm(instance=paciente)
 
     data = {'formularioPaciente': formularioPaciente}
     return render(request, "editar-paciente.html",data)
 
-
+@permission_required('clinicApp.delete_paciente')
 def eliminarPaciente(request, id):
     paciente = get_object_or_404(Paciente, pk= id)
 
@@ -198,7 +214,7 @@ def eliminarPaciente(request, id):
 
     return redirect('paciente')
 
-
+@permission_required('clinicApp.add_hojaatencion')
 def startHoja(request):
 
     hojaAtencion = HojaAtencion.objects.all()
@@ -208,6 +224,7 @@ def startHoja(request):
         }
     return render(request, 'hoja-atencion.html', data)
 
+@permission_required('clinicApp.add_hojaatencion')
 def agregarHoja(request):
     if request.method == 'POST':
         formularioHoja = HojaForm(request.POST)
@@ -238,6 +255,7 @@ def agregarHoja(request):
     return render(request, "agregar-hoja.html",data)
 
 
+@permission_required('clinicApp.change_hojaatencion')
 def editarHoja(request, id):
     hoja = get_object_or_404(HojaAtencion, pk=id)
     if request.method == 'POST':
@@ -245,18 +263,15 @@ def editarHoja(request, id):
         if formularioHoja.is_valid():
             formularioHoja.save()
             return redirect('hoja')
-
-
     else:
         formularioHoja = HojaForm(instance=hoja)
 
     data = {'formularioHoja': formularioHoja}
     return render(request, "editar-hoja.html",data)
 
-
+@permission_required('clinicApp.delete_hojaatencion')
 def eliminarHoja(request, id):
     hoja = get_object_or_404(HojaAtencion, pk= id)
-
     if hoja:
         hoja.delete()
 
@@ -265,11 +280,19 @@ def eliminarHoja(request, id):
 def index(request):
     return render(request, 'index.html')
 
+@permission_required('clinicApp.add_hojaatencion')
 def vistaMedico(request):
     return render(request, 'vista-medico.html')
 
+@permission_required('clinicApp.add_secretaria')
 def vistaSecretaria(request):
     return render(request, 'vista-secretaria.html')
 
 def selVista(request):
     return render(request, 'seleccion-vista.html')
+
+def permisos(request):
+    return render(request, 'permisos.html')
+
+def noPermitido(request):
+    return render(request, 'no-permitido.html')

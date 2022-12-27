@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Permisos</title>
+</head>
+<body>
+    <h1>Permisos directos del usuario: {{ user.username }}</h1>
+    <p>
+        {{ user.get_all_permissions }}
+    </p>
+    </br>
+    <h1>Permisos indirectos del usuario: {{ user.username }}</h1>
+    Estos son los permisos que el usuario obtiene heredados de los grupos a los cuales pertenece
+    <p>
+        {{ user.get_group_permissions }}
+    </p>
+</body>
+<footer>
+
+</footer>
+</html>
